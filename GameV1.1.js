@@ -1,11 +1,11 @@
-var scene=-1;
 var creatures = []; //Empty array for future characters
 var currentOpponent = 1; //Points at current opponent
 var currentPlayer = 0; //Points at the player
-var scene = -1; //Scene 0 = normal, scene 1 = player offensive animation, scene 2 = player defensive animation, scene 3 = enemy attacks
+var scene = -1; //Scene 0 = normal, scene 1 = circle on player, scene 2 = circle on enemy, scene -1 = splashscreen
 var animation = 0;
 var animationCap = 0;
 var turn = 0; //Turn 0 = player, turn 1 = Enemy
+var cooldown = 0;//Prevents player from immediating taking action, preventing bug
 frameRate(3);
 
 var drawBitmojiBody = function (bitmojiX,bitmojiY,bitmojiHeight) {
@@ -432,11 +432,13 @@ var monsterAction = function () { //Determines what the mosnter does (if anythin
 
 splashScreen();
 
+
 var draw = function() {
     if (scene === 0) { //Draws the two characters
         background(255, 255, 255);
         player1.draw();
         creatures[currentOpponent].draw();
+        cooldown = 0;
     }
     if (scene === 1) { //Circle on enemy
         frameRate(60);
@@ -463,7 +465,8 @@ var draw = function() {
 };
 
 keyPressed = function() {//Controls
-    if (scene === 0) {
+    if (scene === 0 && cooldown === 0) {
+        cooldown = 1;
         if (keyCode === UP) {//Use ability 1
         creatures[currentPlayer].ability1();
         }
