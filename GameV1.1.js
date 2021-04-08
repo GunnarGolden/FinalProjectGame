@@ -1,5 +1,12 @@
-
 var scene=-1;
+var creatures = []; //Empty array for future characters
+var currentOpponent = 1; //Points at current opponent
+var currentPlayer = 0; //Points at the player
+var scene = -1; //Scene 0 = normal, scene 1 = player offensive animation, scene 2 = player defensive animation, scene 3 = enemy attacks
+var animation = 0;
+var animationCap = 0;
+var turn = 0; //Turn 0 = player, turn 1 = Enemy
+frameRate(3);
 
 var drawBitmojiBody = function (bitmojiX,bitmojiY,bitmojiHeight) {
 fill(0, 0, 0);
@@ -173,15 +180,11 @@ var splashScreen = function () {
     textSize(20);
     text("Turn Based Battle!",130,148);
     text("By Gunnar Golden and Bryce Vanderlaan.",23,180);
-    currentScene = 0;
 };
-
-splashScreen();
 
 mouseClicked = function () {
     startBtn.handleMouseClick();
 };
-
 
 function hatTail (x,y,size) {
 //hat tail
@@ -253,18 +256,7 @@ head (x,y,size);
 }
 //end of bitmoji code
 
-var creatures = []; //Empty array for future characters
-var currentOpponent = 1; //Points at current opponent
-var currentPlayer = 0; //Points at the player
-var scene = 0; //Scene 0 = normal, scene 1 = player offensive animation, scene 2 = player defensive animation, scene 3 = enemy attacks
-var animation = 0;
-var animationCap = 0;
-var turn = 0; //Turn 0 = player, turn 1 = Enemy
-frameRate(3);
 
-var damageAnimation = function(damage) {
-
-};
 
 var Person = function(config) { //Constructor for characters
     this.x = config.x;
@@ -437,6 +429,8 @@ var monsterAction = function () { //Determines what the mosnter does (if anythin
     }
     }
 };
+
+splashScreen();
 
 var draw = function() {
     if (scene === 0) { //Draws the two characters
