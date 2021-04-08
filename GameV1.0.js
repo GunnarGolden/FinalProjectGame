@@ -1,5 +1,5 @@
 
-var currentScene=0;
+var scene=-1;
 
 var drawBitmojiBody = function (bitmojiX,bitmojiY,bitmojiHeight) {
 fill(0, 0, 0);
@@ -160,7 +160,7 @@ var startBtn = new Button({ //Defines start button
     width:120,
     label: "Start Game",
     onClick: function () {
-        currentScene=1;
+        scene=0;
     }
 }); 
 
@@ -177,6 +177,10 @@ var splashScreen = function () {
 };
 
 splashScreen();
+
+mouseClicked = function () {
+    startBtn.handleMouseClick();
+};
 
 
 function hatTail (x,y,size) {
